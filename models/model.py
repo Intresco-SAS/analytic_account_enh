@@ -40,3 +40,40 @@ class AccountMove(models.Model):
                 if res.name == self.name and res.debit > 0 and not res.analytic_account_id:
                     res.analytic_account_id = self.analytic_account_id.id
         return result
+
+
+class SaleOrder(models.Model):
+    _inherit = "sale.order"
+
+    # Inherited method to pass sales order id in context
+    def action_confirm(self):
+        res = super(SaleOrder, self.with_context(from_so=self.id)).action_confirm()
+        return res
+
+
+class MrpProduction(models.Model):
+    _inherit = "mrp.production"
+
+    @api.model
+    def create(self, vals):
+        # To set analytic account on manufacturing order from sales order
+        if self._context.get('from_so'):
+            so = self.env['sale.order'].sudo().browse(self._context.get('from_so'))
+            if so and so.analytic_account_id:
+                vals['analytic_account_id'] = so.analytic_account_id.id
+        res = super(MrpProduction, self).create(vals)
+        return res
+
+
+class PurchaseOrderLine(models.Model):
+    _inherit = "purchase.order.line"
+
+    @api.model
+    def create(self, vals):
+        # To set analytic account on purchase order lines from sales order
+        if self._context.get('from_so'):
+            so = self.env['sale.order'].sudo().browse(self._context.get('from_so'))
+            if so and so.analytic_account_id:
+                vals['account_analytic_id'] = so.analytic_account_id.id
+        res = super(PurchaseOrderLine, self).create(vals)
+        return res

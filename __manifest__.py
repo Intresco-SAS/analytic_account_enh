@@ -7,7 +7,9 @@
     "depends": [
         "invoice_analytic_account",
         "stock_analytic",
-        'sale_management'
+        'sale_management',
+        'mrp_analytic',
+        'purchase',
     ],
     "data": [
         "views/view.xml"
