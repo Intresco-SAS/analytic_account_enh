@@ -37,7 +37,7 @@ class AccountMove(models.Model):
         result = super(AccountMove, self).action_post()
         for res in self.line_ids:
             if self.analytic_account_id:
-                if res.name == self.name and res.debit > 0 and not res.analytic_account_id:
+                if res.name == self.name and (res.debit > 0 or res.credit > 0) and not res.analytic_account_id:
                     res.analytic_account_id = self.analytic_account_id.id
         return result
 
