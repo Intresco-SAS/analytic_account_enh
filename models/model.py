@@ -52,6 +52,13 @@ class SaleOrder(models.Model):
         res = super(SaleOrder, self.with_context(from_so=self.id)).action_confirm()
         return res
 
+    def action_post_sale(self):
+        if self.state == 'sale':
+            for line in self.analytic_account_id:
+                if not line.analytic_account_id:
+                    raise UserError(
+                        "Please add Analytic Account on all Sales Lines, in order to confirm invoice!")
+
 
 class MrpProduction(models.Model):
     _inherit = "mrp.production"
