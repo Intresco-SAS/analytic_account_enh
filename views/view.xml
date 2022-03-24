@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
     <data>
-        <record id="view_order_form_inh_analytic_account_enh" model="ir.ui.view">
+        <!--record id="view_order_form_inh_analytic_account_enh" model="ir.ui.view">
             <field name="name">sale.order.view.form</field>
             <field name="model">sale.order</field>
             <field name="inherit_id" ref="sale.view_order_form" />
@@ -10,7 +10,7 @@
                     <attribute name='required'>1</attribute>
                 </xpath>
             </field>
-        </record>
+        </record-->
 
         <record id="view_picking_form_analytic_inh_analytic_account_enh" model="ir.ui.view">
             <field name="name">stock.picking.view.form</field>
