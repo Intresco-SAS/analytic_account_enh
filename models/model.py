@@ -52,12 +52,12 @@ class SaleOrder(models.Model):
         res = super(SaleOrder, self.with_context(from_so=self.id)).action_confirm()
         return res
 
-    def action_confirm(self):
+    '''def action_confirm(self):
         super(SaleOrder, self).action_confirm()
         if self.state == 'sale':
             if not self.analytic_account_id:
                 raise UserError(
-                    "Please add Analytic Account on all Sales Lines, in order to confirm invoice!")
+                    "Please add Analytic Account on all Sales Lines, in order to confirm invoice!")'''
 
 
     def action_post_sale(self):
