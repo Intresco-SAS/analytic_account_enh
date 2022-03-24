@@ -54,7 +54,7 @@ class SaleOrder(models.Model):
 
     def action_post_sale(self):
         res = super(SaleOrder, self).action_confirm()
-        if self.state == 'sale':
+        if self.state == 'draft' or self.state == 'sent':
             for line in self.analytic_account_id:
                 if not line.name:
                     raise UserError(
