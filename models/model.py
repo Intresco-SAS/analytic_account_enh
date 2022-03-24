@@ -55,7 +55,7 @@ class SaleOrder(models.Model):
     def action_post_sale(self):
         if self.state == 'sale':
             for line in self.analytic_account_id:
-                if not line.analytic_account_id:
+                if not line.name:
                     raise UserError(
                         "Please add Analytic Account on all Sales Lines, in order to confirm invoice!")
 
