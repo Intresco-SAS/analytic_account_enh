@@ -12,6 +12,8 @@ class StockMove(models.Model):
         res = super(StockMove, self).create(vals)
         if res.sale_line_id and res.sale_line_id.order_id and res.sale_line_id.order_id.analytic_account_id:
             res.analytic_account_id = res.sale_line_id.order_id.analytic_account_id.id
+        if res.purchase_line_id and res.purchase_line_id.order_id and res.purchase_line_id.account_analytic_id:
+            res.analytic_account_id = res.purchase_line_id.account_analytic_id.id
         return res
 
 
