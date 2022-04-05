@@ -533,6 +533,14 @@ class AccountPayment(models.Model):
 
         if lines and abs(sum(lines.mapped('amount_currency'))) == abs(self.amount):
             for l in lines:
+                default_line_name = self.env['account.move.line']._get_default_line_name(
+                    _("Internal Transfer") if self.is_internal_transfer else payment_display_name['%s-%s' % (self.payment_type, self.partner_type)],
+                    l.amount_currency,
+                    self.currency_id,
+                    self.date,
+                    partner=self.partner_id,
+                )
+
                 # Liquidity line.
                 line_vals_list.append({
                     'name': liquidity_line_name or default_line_name,
@@ -550,6 +558,13 @@ class AccountPayment(models.Model):
                     aamount_currency = abs(l.amount_currency)
                 else:
                     aamount_currency = -l.amount_currency
+                default_line_name = self.env['account.move.line']._get_default_line_name(
+                    _("Internal Transfer") if self.is_internal_transfer else payment_display_name['%s-%s' % (self.payment_type, self.partner_type)],
+                    aamount_currency,
+                    self.currency_id,
+                    self.date,
+                    partner=self.partner_id,
+                )
 
                 # Receivable / Payable.
                 line_vals_list.append({
