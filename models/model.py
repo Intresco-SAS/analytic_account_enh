@@ -530,7 +530,8 @@ class AccountPayment(models.Model):
         lines = False
         if self._context.get('line_ids'):
             lines = self.env['account.move.line'].browse(self._context.get('line_ids'))
-        if lines and sum(lines.mapped('amount_currency')) == self.amount:
+
+        if lines and abs(sum(lines.mapped('amount_currency'))) == abs(self.amount):
             for l in lines:
                 # Liquidity line.
                 line_vals_list.append({
@@ -544,14 +545,20 @@ class AccountPayment(models.Model):
                     'account_id': self.journal_id.payment_credit_account_id.id if l.amount_currency < 0.0 else self.journal_id.payment_debit_account_id.id,
                     'analytic_account_id': l.analytic_account_id and l.analytic_account_id.id or False,
                 })
+
+                if counterpart_amount_currency > 0:
+                    aamount_currency = abs(l.amount_currency)
+                else:
+                    aamount_currency = -l.amount_currency
+
                 # Receivable / Payable.
                 line_vals_list.append({
                     'name': self.payment_reference or default_line_name,
                     'date_maturity': self.date,
-                    'amount_currency': -l.amount_currency,
+                    'amount_currency': aamount_currency,
                     'currency_id': currency_id,
-                    'debit': l.amount_currency if -l.amount_currency > 0.0 else 0.0,
-                    'credit': l.amount_currency if -l.amount_currency < 0.0 else 0.0,
+                    'debit': aamount_currency if aamount_currency > 0.0 else 0.0,
+                    'credit': -aamount_currency if aamount_currency < 0.0 else 0.0,
                     'partner_id': self.partner_id.id,
                     'account_id': self.destination_account_id.id,
                     'analytic_account_id': l.analytic_account_id and l.analytic_account_id.id or False,
@@ -592,5 +599,4 @@ class AccountPayment(models.Model):
                 'partner_id': self.partner_id.id,
                 'account_id': write_off_line_vals.get('account_id'),
             })
-        print("LINE VALUE LIST..........", line_vals_list)
         return line_vals_list
