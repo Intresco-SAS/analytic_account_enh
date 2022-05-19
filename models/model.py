@@ -232,25 +232,25 @@ class AccountMove(models.Model):
 class SaleOrder(models.Model):
     _inherit = "sale.order"
 
-    # Inherited method to pass sales order id in context
-    def action_confirm(self):
-        res = super(SaleOrder, self.with_context(from_so=self.id)).action_confirm()
-        return res
+    # Inherited method to pass sales order id in context and Raise
 
-    '''def action_confirm(self):
-        super(SaleOrder, self).action_confirm()
-        if self.state == 'sale':
-            if not self.analytic_account_id:
-                raise UserError(
-                    "Please add Analytic Account on all Sales Lines, in order to confirm invoice!")'''
-
-    def action_post_sale(self):
-        res = super(SaleOrder, self).action_confirm()
+    def action_confirm(self):        
         if self.state == 'draft' or self.state == 'sent':
             if not self.analytic_account_id:
                 raise UserError(
-                    "Please add Analytic Account on all Sales Lines, in order to confirm invoice!")
-        return res
+                    "Please add Analytic Account on all Sales Lines, in order to confirm Sale Order!")
+        result = super(SaleOrder, self.with_context(from_so=self.id)).action_confirm()
+
+class PurchaseOrder(models.Model):
+    _inherit = "purchase.order"
+
+    def button_confirm(self):
+        if self.state == 'draft':
+            for line in self.order_line:
+                if not line.account_analytic_id:
+                    raise UserError(
+                        "Please add Analytic Account on all Invoice Lines, in order to confirm Purchase Order!")
+        result = super(PurchaseOrder, self).button_confirm()
 
 
 class MrpProduction(models.Model):
@@ -279,6 +279,7 @@ class PurchaseOrderLine(models.Model):
                 vals['account_analytic_id'] = so.analytic_account_id.id
         res = super(PurchaseOrderLine, self).create(vals)
         return res
+    
 
 
 class AccountPaymentRegister(models.TransientModel):
