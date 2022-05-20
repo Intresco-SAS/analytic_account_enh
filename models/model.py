@@ -35,7 +35,7 @@ class AccountMove(models.Model):
             for line in self.invoice_line_ids:
                 if not line.analytic_account_id:
                     raise UserError(
-                        "Please add Analytic Account on all Invoice Lines, in order to confirm invoice!")
+                        _("Please add Analytic Account on all Invoice Lines, in order to confirm invoice!"))
         result = super(AccountMove, self).action_post()
         for res in self.line_ids:
             if self.analytic_account_id:
@@ -238,7 +238,7 @@ class SaleOrder(models.Model):
         if self.state == 'draft' or self.state == 'sent':
             if not self.analytic_account_id:
                 raise UserError(
-                    "Please add Analytic Account on all Sales Lines, in order to confirm Sale Order!")
+                    _("Please add Analytic Account on all Sales Lines, in order to confirm Sale Order!"))
         result = super(SaleOrder, self.with_context(from_so=self.id)).action_confirm()
 
 class PurchaseOrder(models.Model):
@@ -249,7 +249,7 @@ class PurchaseOrder(models.Model):
             for line in self.order_line:
                 if not line.account_analytic_id:
                     raise UserError(
-                        "Please add Analytic Account on all Invoice Lines, in order to confirm Purchase Order!")
+                        _("Please add Analytic Account on all Invoice Lines, in order to confirm Purchase Order!"))
         result = super(PurchaseOrder, self).button_confirm()
 
 

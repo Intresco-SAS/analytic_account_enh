@@ -1,0 +1,185 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* analytic_account_enh
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0-20220401\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-05-20 15:02+0000\n"
+"PO-Revision-Date: 2022-05-20 10:06-0500\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"X-Generator: Poedit 3.0.1\n"
+
+#. module: analytic_account_enh
+#: code:addons/analytic_account_enh/models/model.py:0
+#, python-format
+msgid "A payment must always belongs to a bank or cash journal."
+msgstr ""
+
+#. module: analytic_account_enh
+#: code:addons/analytic_account_enh/models/model.py:0
+#, python-format
+msgid "Customer Payment"
+msgstr ""
+
+#. module: analytic_account_enh
+#: code:addons/analytic_account_enh/models/model.py:0
+#, python-format
+msgid "Customer Reimbursement"
+msgstr ""
+
+#. module: analytic_account_enh
+#: model:ir.model.fields,field_description:analytic_account_enh.field_account_move__display_name
+#: model:ir.model.fields,field_description:analytic_account_enh.field_mrp_production__display_name
+#: model:ir.model.fields,field_description:analytic_account_enh.field_purchase_order_line__display_name
+#: model:ir.model.fields,field_description:analytic_account_enh.field_sale_order__display_name
+#: model:ir.model.fields,field_description:analytic_account_enh.field_stock_move__display_name
+msgid "Display Name"
+msgstr "Nombre Público"
+
+#. module: analytic_account_enh
+#: model:ir.model.fields,field_description:analytic_account_enh.field_account_move__id
+#: model:ir.model.fields,field_description:analytic_account_enh.field_mrp_production__id
+#: model:ir.model.fields,field_description:analytic_account_enh.field_purchase_order_line__id
+#: model:ir.model.fields,field_description:analytic_account_enh.field_sale_order__id
+#: model:ir.model.fields,field_description:analytic_account_enh.field_stock_move__id
+msgid "ID"
+msgstr ""
+
+#. module: analytic_account_enh
+#: code:addons/analytic_account_enh/models/model.py:0
+#, python-format
+msgid "Internal Transfer"
+msgstr ""
+
+#. module: analytic_account_enh
+#: model:ir.model.fields,field_description:analytic_account_enh.field_account_move____last_update
+#: model:ir.model.fields,field_description:analytic_account_enh.field_mrp_production____last_update
+#: model:ir.model.fields,field_description:analytic_account_enh.field_purchase_order_line____last_update
+#: model:ir.model.fields,field_description:analytic_account_enh.field_sale_order____last_update
+#: model:ir.model.fields,field_description:analytic_account_enh.field_stock_move____last_update
+msgid "Last Modified on"
+msgstr "Última Modificación el"
+
+#. module: analytic_account_enh
+#: model:ir.model,name:analytic_account_enh.model_account_move
+msgid "Model to create and save withholding taxes"
+msgstr ""
+
+#. module: analytic_account_enh
+#: code:addons/analytic_account_enh/models/model.py:0
+#, python-format
+msgid ""
+"Please add Analytic Account on all Invoice Lines, in order to confirm "
+"Purchase Order!"
+msgstr ""
+"Debe agregar una Cuenta analítica en todas las líneas para Confirmar la "
+"Orden de compra"
+
+#. module: analytic_account_enh
+#: code:addons/analytic_account_enh/models/model.py:0
+#, python-format
+msgid ""
+"Please add Analytic Account on all Invoice Lines, in order to confirm "
+"invoice!"
+msgstr ""
+"Debe agregar una Cuenta Analítica en todas las líneas para Confirmar la "
+"Factura!"
+
+#. module: analytic_account_enh
+#: code:addons/analytic_account_enh/models/model.py:0
+#, python-format
+msgid ""
+"Please add Analytic Account on all Sales Lines, in order to confirm Sale "
+"Order!"
+msgstr ""
+"Debe agregar una Cuenta Analítica para Confirmar la Orden de Venta!"
+
+#. module: analytic_account_enh
+#: model:ir.model,name:analytic_account_enh.model_mrp_production
+msgid "Production Order"
+msgstr "Orden de producción"
+
+#. module: analytic_account_enh
+#: model:ir.model,name:analytic_account_enh.model_purchase_order_line
+msgid "Purchase Order Line"
+msgstr "Línea de Orden de Compra"
+
+#. module: analytic_account_enh
+#: model:ir.model,name:analytic_account_enh.model_sale_order
+msgid "Sales Order"
+msgstr ""
+"#-#-#-#-#  es_CO.po (Odoo 9.0)  #-#-#-#-#\n"
+"Orden de Venta\n"
+"#-#-#-#-#  es_CO.po (Odoo 9.0)  #-#-#-#-#\n"
+"Pedido de Venta"
+
+#. module: analytic_account_enh
+#: model:ir.model,name:analytic_account_enh.model_stock_move
+msgid "Stock Move"
+msgstr "Movimiento de Existencias"
+
+#. module: analytic_account_enh
+#: code:addons/analytic_account_enh/models/model.py:0
+#, python-format
+msgid ""
+"The journal entry %s reached an invalid state relative to its payment.\n"
+"To be consistent, the journal items must share the same currency."
+msgstr ""
+"La entrada de diario %s alcanzó un estado no válido en relación con su "
+"pago.\n"
+"Para ser coherentes, los elementos del diario deben compartir la misma "
+"moneda."
+
+#. module: analytic_account_enh
+#: code:addons/analytic_account_enh/models/model.py:0
+#, python-format
+msgid ""
+"The journal entry %s reached an invalid state relative to its payment.\n"
+"To be consistent, the journal items must share the same partner."
+msgstr ""
+"La entrada de diario %s alcanzó un estado no válido en relación con su "
+"pago.\n"
+"Para ser coherentes, los elementos del diario deben compartir el mismo "
+"socio."
+
+#. module: analytic_account_enh
+#: code:addons/analytic_account_enh/models/model.py:0
+#, python-format
+msgid "Transfer from %s"
+msgstr ""
+
+#. module: analytic_account_enh
+#: code:addons/analytic_account_enh/models/model.py:0
+#, python-format
+msgid "Transfer to %s"
+msgstr ""
+
+#. module: analytic_account_enh
+#: code:addons/analytic_account_enh/models/model.py:0
+#, python-format
+msgid "Vendor Payment"
+msgstr ""
+
+#. module: analytic_account_enh
+#: code:addons/analytic_account_enh/models/model.py:0
+#, python-format
+msgid "Vendor Reimbursement"
+msgstr ""
+
+#. module: analytic_account_enh
+#: code:addons/analytic_account_enh/models/model.py:0
+#, python-format
+msgid ""
+"You can't create a new payment without an outstanding payments/receipts "
+"account set on the %s journal."
+msgstr ""
+"No puede crear un nuevo pago sin una cuenta de pagos/cobros pendientes "
+"configurada en el diario %s."
