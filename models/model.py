@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from odoo import api, fields, models, _
+from odoo import api, fields, exceptions, models, _
 from odoo.exceptions import UserError
 
 
@@ -620,8 +620,6 @@ class AccountPayment(models.Model):
 class AccountAnalyticAccount(models.Model):
     _inherit = "account.analytic.account"
 
-    _sql_constraints = [(
-        'account_analytic_unique_reference',
-        'unique(code)',
-        _('La Referencia de la Cuenta Analitica debe ser única')
-    )]
+    _sql_constraints = [
+        ('account_analytic_unique_reference','unique(code)',_('La Referencia de la Cuenta Analitica debe ser única'))
+    ]
