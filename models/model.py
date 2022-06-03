@@ -2,6 +2,8 @@
 
 from odoo import api, fields, exceptions, models, _
 from odoo.exceptions import UserError
+import logging
+_logger = logging.getLogger(__name__)
 
 
 class StockMove(models.Model):
@@ -620,6 +622,10 @@ class AccountPayment(models.Model):
 class AccountAnalyticAccount(models.Model):
     _inherit = "account.analytic.account"
 
-    _sql_constraints = [
-        ('account_analytic_unique_reference','unique(code)',_('La Referencia de la Cuenta Analitica debe ser única'))
-    ]
+    @api.onchange('code')
+    def _check_code(self):
+        default_code = self.env['account.analytic.account'].search([('code','=',self.code)])
+        if not self.code:
+            return
+        if default_code:
+            raise exceptions.ValidationError('La Referencia de la Cuenta Analitica debe ser Única')
