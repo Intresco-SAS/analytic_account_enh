@@ -26,5 +26,16 @@
                 </xpath>
             </field>
         </record>
+
+        <record id="view_account_analytic_account_form_co" model="ir.ui.view">
+            <field name="name">view.analytic.account.form.co</field>
+            <field name="model">account.analytic.account</field>
+            <field name="inherit_id" ref="analytic.view_account_analytic_account_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='code']" position="attributes">
+                    <attribute name='required'>1</attribute>
+                </xpath>
+            </field>
+        </record>
     </data>
 </odoo>
