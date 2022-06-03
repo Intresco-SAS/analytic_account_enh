@@ -616,3 +616,12 @@ class AccountPayment(models.Model):
                 'account_id': write_off_line_vals.get('account_id'),
             })
         return line_vals_list
+    
+class AccountAnalyticAccount(models.Model):
+    _inherit = "account.analytic.account"
+
+    _sql_constraints = [(
+        'account_analytic_unique_reference',
+        'unique(code)',
+        _('La Referencia de la Cuenta Analitica debe ser única')
+    )]
