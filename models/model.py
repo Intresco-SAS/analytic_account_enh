@@ -199,9 +199,12 @@ class AccountMove(models.Model):
                     if l.analytic_account_id:
                         computation_date = _get_payment_terms_computation_date(self)
                         account = _get_payment_terms_account(self, l)
-                        to_compute = _compute_payment_terms(self, computation_date, line_dict.get(l.analytic_account_id.id).get('total_balance'), line_dict.get(l.analytic_account_id.id).get('total_amount_currency'))
-                        new_terms_line = _compute_diff_payment_terms_lines(self, l, account, to_compute)
-                        new_terms_line_ids.append(new_terms_line.id)
+                        try:
+                            to_compute = _compute_payment_terms(self, computation_date, line_dict.get(l.analytic_account_id.id).get('total_balance'), line_dict.get(l.analytic_account_id.id).get('total_amount_currency'))
+                            new_terms_line = _compute_diff_payment_terms_lines(self, l, account, to_compute)
+                            new_terms_line_ids.append(new_terms_line.id)
+                        except:
+                            pass
                 for analytic_account_id, vals in line_dict.items():
                     flag_has_account = False
                     for l in existing_terms_lines:
