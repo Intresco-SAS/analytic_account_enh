@@ -1,17 +1,23 @@
 # -*- coding: utf-8 -*-
 
-from odoo import api, fields, models
+from odoo import api, fields, exceptions, models, _
 from odoo.exceptions import UserError
+import logging
+_logger = logging.getLogger(__name__)
 
 
 class StockMove(models.Model):
     _inherit = "stock.move"
 
     @api.model
+    #Función trasladar la Cuenta analitica de cada Línea de orden de Venta/Compra hacia la Entrega/Recepción.
     def create(self, vals):
         res = super(StockMove, self).create(vals)
         if res.sale_line_id and res.sale_line_id.order_id and res.sale_line_id.order_id.analytic_account_id:
             res.analytic_account_id = res.sale_line_id.order_id.analytic_account_id.id
+        #Se oculta esta función hasta que se realice el desarrollo completo de Contabilidad Analitica.
+        if res.purchase_line_id and res.purchase_line_id.order_id and res.purchase_line_id.account_analytic_id:
+            res.analytic_account_id = res.purchase_line_id.account_analytic_id.id
         return res
 
 
@@ -33,7 +39,7 @@ class AccountMove(models.Model):
             for line in self.invoice_line_ids:
                 if not line.analytic_account_id:
                     raise UserError(
-                        "Please add Analytic Account on all Invoice Lines, in order to confirm invoice!")
+                        _("Please add Analytic Account on all Invoice Lines, in order to confirm invoice!"))
         result = super(AccountMove, self).action_post()
         for res in self.line_ids:
             if self.analytic_account_id:
@@ -43,30 +49,29 @@ class AccountMove(models.Model):
                     res.analytic_account_id = self.analytic_account_id.id
         return result
 
-
 class SaleOrder(models.Model):
     _inherit = "sale.order"
 
-    # Inherited method to pass sales order id in context
-    def action_confirm(self):
-        res = super(SaleOrder, self.with_context(from_so=self.id)).action_confirm()
-        return res
+    # Inherited method to pass sales order id in context and Raise
 
-    '''def action_confirm(self):
-        super(SaleOrder, self).action_confirm()
-        if self.state == 'sale':
-            if not self.analytic_account_id:
-                raise UserError(
-                    "Please add Analytic Account on all Sales Lines, in order to confirm invoice!")'''
-
-
-    def action_post_sale(self):
-        res = super(SaleOrder, self).action_confirm()
+    def action_confirm(self):        
         if self.state == 'draft' or self.state == 'sent':
             if not self.analytic_account_id:
                 raise UserError(
-                    "Please add Analytic Account on all Sales Lines, in order to confirm invoice!")
-        return res
+                    _("Please add Analytic Account on all Sales Lines, in order to confirm Sale Order!"))
+        result = super(SaleOrder, self.with_context(from_so=self.id)).action_confirm()
+
+class PurchaseOrder(models.Model):
+    _inherit = "purchase.order"
+
+    def button_confirm(self):
+        if self.state == 'draft':
+            for line in self.order_line:
+                if not line.account_analytic_id:
+                    raise UserError(
+                        _("Please add Analytic Account on all Invoice Lines, in order to confirm Purchase Order!"))
+        result = super(PurchaseOrder, self).button_confirm()
+
 
 class MrpProduction(models.Model):
     _inherit = "mrp.production"
@@ -94,3 +99,14 @@ class PurchaseOrderLine(models.Model):
                 vals['account_analytic_id'] = so.analytic_account_id.id
         res = super(PurchaseOrderLine, self).create(vals)
         return res
+    
+class AccountAnalyticAccount(models.Model):
+    _inherit = "account.analytic.account"
+
+    @api.onchange('code')
+    def _check_code(self):
+        default_code = self.env['account.analytic.account'].search([('code','=',self.code)])
+        if not self.code:
+            return
+        if default_code:
+            raise exceptions.ValidationError('La Referencia de la Cuenta Analitica debe ser Única')
