@@ -54,12 +54,12 @@ class SaleOrder(models.Model):
 
     # Inherited method to pass sales order id in context and Raise
 
-    def action_confirm(self):        
-        if self.state == 'draft' or self.state == 'sent':
-            if not self.analytic_account_id:
-                raise UserError(
-                    _("Please add Analytic Account on all Sales Lines, in order to confirm Sale Order!"))
-        result = super(SaleOrder, self.with_context(from_so=self.id)).action_confirm()
+    #def action_confirm(self):        
+    #    if self.state == 'draft' or self.state == 'sent':
+    #        if not self.analytic_account_id:
+    #            raise UserError(
+    #                _("Please add Analytic Account on all Sales Lines, in order to confirm Sale Order!"))
+    #    result = super(SaleOrder, self.with_context(from_so=self.id)).action_confirm()
 
 class PurchaseOrder(models.Model):
     _inherit = "purchase.order"
