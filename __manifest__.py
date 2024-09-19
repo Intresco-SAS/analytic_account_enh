@@ -2,7 +2,7 @@
 {
     "name": "Analytic Account Enhancement",
     "summary": "Analytic Account Enhancement in sales, invoicing, inventory etc.",
-    "version": "14.0.0.1",
+    "version": "15.0.0.1",
     "category": "Accounting",
     "depends": [
         "invoice_analytic_account",

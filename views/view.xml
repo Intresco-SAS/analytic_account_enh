@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
     <data>
-        <record id="view_move_form_analytic_co" model="ir.ui.view">
+        <!-- <record id="view_move_form_analytic_co" model="ir.ui.view">
             <field name="name">account.move.form.analytic</field>
             <field name="model">account.move</field>
             <field name="inherit_id" ref="account.view_move_form" />
@@ -14,9 +14,9 @@
                     <attribute name='optional'>hide</attribute>
                 </xpath>
             </field>
-        </record>
+        </record> -->
 
-        <record id="view_picking_form_analytic_inh_analytic_account_enh" model="ir.ui.view">
+        <!-- <record id="view_picking_form_analytic_inh_analytic_account_enh" model="ir.ui.view">
             <field name="name">stock.picking.view.form</field>
             <field name="model">stock.picking</field>
             <field name="inherit_id" ref="stock_analytic.view_picking_form_analytic" />
@@ -25,7 +25,7 @@
                     <attribute name='required'>1</attribute>
                 </xpath>
             </field>
-        </record>
+        </record> -->
 
         <record id="view_account_analytic_account_form_co" model="ir.ui.view">
             <field name="name">view.analytic.account.form.co</field>
