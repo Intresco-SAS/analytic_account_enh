@@ -8,7 +8,6 @@
         #"invoice_analytic_account",
         "stock_analytic",
         'sale_management',
-        #'mrp_analytic',
         'purchase',
     ],
     "data": [
