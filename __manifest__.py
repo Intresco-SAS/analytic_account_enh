@@ -5,10 +5,10 @@
     "version": "15.0.0.1",
     "category": "Accounting",
     "depends": [
-        "invoice_analytic_account",
+        #"invoice_analytic_account",
         "stock_analytic",
         'sale_management',
-        'mrp_analytic',
+        #'mrp_analytic',
         'purchase',
     ],
     "data": [
