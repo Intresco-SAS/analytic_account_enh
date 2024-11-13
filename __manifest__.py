@@ -9,6 +9,7 @@
         "stock_analytic",
         'sale_management',
         'purchase',
+        "purchase_stock_analytic",
     ],
     "data": [
         "views/view.xml"
