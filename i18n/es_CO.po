@@ -6,11 +6,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-03 14:04+0000\n"
-"PO-Revision-Date: 2025-04-03 09:05-0500\n"
+"POT-Creation-Date: 2025-04-03 20:26+0000\n"
+"PO-Revision-Date: 2025-04-03 15:27-0500\n"
 "Last-Translator: \n"
 "Language-Team: \n"
-"Language: es_CO\n"
+"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -35,9 +35,7 @@ msgstr ""
 msgid ""
 "Please add Analytic Account on all lines, in order to confirm Purchase "
 "Order!"
-msgstr ""
-"¡Agregue una cuenta analítica en todas las líneas para confirmar la "
-"orden de compra!"
+msgstr "¡Agregue una cuenta analítica en todas las líneas para confirmar la orden de compra!"
 
 #. module: analytic_account_enh
 #: code:addons/analytic_account_enh/models/sale_order.py:0
@@ -53,9 +51,21 @@ msgstr "Orden de Compra"
 #. module: analytic_account_enh
 #: model:ir.model,name:analytic_account_enh.model_sale_order
 msgid "Sales Order"
-msgstr "Orden de Venta"
+msgstr "Pedido de Venta"
+
+#. module: analytic_account_enh
+#: model_terms:ir.ui.view,arch_db:analytic_account_enh.purchase_order_form_inherit_int
+msgid "Set analytic to all lines"
+msgstr "Colocar en todas las líneas"
 
 #. module: analytic_account_enh
 #: model:ir.model,name:analytic_account_enh.model_stock_move
 msgid "Stock Move"
 msgstr "Movimiento de Existencias"
+
+#. module: analytic_account_enh
+#: model_terms:ir.ui.view,arch_db:analytic_account_enh.purchase_order_form_inherit_int
+msgid ""
+"This changes the analytic account of all lines to the given analytic account"
+msgstr ""
+"Esto cambia la cuenta analítica de todas las líneas a la cuenta analítica dada"

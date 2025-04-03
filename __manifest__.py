@@ -11,6 +11,7 @@
         'sale_management',
         'purchase',
         "purchase_stock_analytic",
+        "purchase_analytic_global",
     ],
     "data": [
         "views/account_analytic_account_view.xml",

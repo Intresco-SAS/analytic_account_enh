@@ -26,5 +26,18 @@
             </field>
         </record>
         
+        <record id="purchase_order_form_inherit_int" model="ir.ui.view">
+            <field name="name">purchase.order.form.inherit.int</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase_analytic_global.purchase_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='account_analytic_id']" position="after">
+                    <button name="action_set_analytic_account" type="object" states="draft,sent,to approve"
+                            string="Set analytic to all lines"
+                            class="btn btn-default btn-sm o_icon_button oe_edit_only"
+                            help="This changes the analytic account of all lines to the given analytic account"/>
+                </xpath>
+            </field>
+        </record>
     </data>
 </odoo>

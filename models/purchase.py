@@ -15,3 +15,7 @@ class PurchaseOrder(models.Model):
                     raise UserError(
                         _("Please add Analytic Account on all lines, in order to confirm Purchase Order!"))
         super(PurchaseOrder, self).button_confirm()
+
+    def action_set_analytic_account(self):
+        for order in self:
+            order.order_line.update({'account_analytic_id': order.account_analytic_id.id})
