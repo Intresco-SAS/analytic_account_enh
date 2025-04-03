@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <!-- Inherit the analytic account form view to add a required attribute to the code field -->
+        <record id="view_purchase_order_filter_inherit" model="ir.ui.view">
+            <field name="name">view.purchase.order.filter.inherit</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.view_purchase_order_filter"/>
+            <field name="arch" type="xml">
+                <!-- Insertar el nuevo campo acc_analytic_id -->
+                <xpath expr="//search" position="inside">
+                    <field name="acc_analytic_id" string="Analytic Account"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="purchase_order_view_search_inherit" model="ir.ui.view">
+            <field name="name">purchase.order.view.search.inherit</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.purchase_order_view_search"/>
+            <field name="arch" type="xml">
+                <!-- Insertar el nuevo campo acc_analytic_id -->
+                <xpath expr="//search" position="inside">
+                    <field name="acc_analytic_id" string="Analytic Account"/>
+                </xpath>
+            </field>
+        </record>
+        
+    </data>
+</odoo>

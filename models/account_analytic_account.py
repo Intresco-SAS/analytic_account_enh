@@ -15,38 +15,6 @@ class AccountAnalyticAccount(models.Model):
             return
         if default_code:
             raise exceptions.ValidationError('La Referencia de la Cuenta Analitica debe ser Única')
-    
-class SaleOrder(models.Model):
-    _inherit = "sale.order"
-
-    def action_confirm(self):        
-        if self.state == 'draft' or self.state == 'sent':
-            if not self.analytic_account_id:
-                raise UserError(
-                    _("Please add Analytic Account, in order to confirm Sale Order!"))
-        super(SaleOrder, self.with_context(from_so=self.id)).action_confirm()
-
-class PurchaseOrder(models.Model):
-    _inherit = "purchase.order"
-
-    def button_confirm(self):
-        if self.state == 'draft':
-            for line in self.order_line:
-                if not line.account_analytic_id:
-                    raise UserError(
-                        _("Please add Analytic Account on all lines, in order to confirm Purchase Order!"))
-        super(PurchaseOrder, self).button_confirm()
-
-class StockMove(models.Model):
-    _inherit = "stock.move"
-
-    @api.model
-    #Función trasladar la Cuenta analitica de cada Línea de orden de Venta hacia la Entrega.
-    def create(self, vals):
-        res = super(StockMove, self).create(vals)
-        if res.sale_line_id and res.sale_line_id.order_id and res.sale_line_id.order_id.analytic_account_id:
-            res.analytic_account_id = res.sale_line_id.order_id.analytic_account_id.id
-        return res
 
 # class AccountMove(models.Model):
 #     _inherit = "account.move"
